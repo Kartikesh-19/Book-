@@ -54,3 +54,21 @@
       }
     }
   `;
+export const BackButton = styled.div`
+button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-left:24%;
+      gap:2px;
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+    }
+
+`;

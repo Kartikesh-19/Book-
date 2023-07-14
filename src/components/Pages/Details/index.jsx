@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addFavorite, removeFavorite } from "../../redux/slices/favoriteSlice";
 import { useSelector } from "react-redux";
 import FavoritesList from "../favorites";
@@ -10,8 +10,10 @@ import {
   Container,
   BookInfo,
   FavBtn,
+  BackButton,
 } from "./../../css/bookDetailStyle/bookDetailStyle";
 const BookDetails = () => {
+  const navigate = useNavigate();
   const [book, setBook] = useState(null);
   console.log("🚀 ~ file: index.jsx:10 ~ BookDetails ~ book:", book);
   const [fav, setFav] = useState(false);
@@ -59,12 +61,15 @@ const BookDetails = () => {
   const authors = volumeInfo?.authors
     ? volumeInfo.authors.join(", ")
     : "Unknown Author";
-  console.log("🚀 ~ file: index.jsx:44 ~ BookDetails ~ authors:", authors);
   const description = volumeInfo?.description || "No description available.";
   const image = volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : "";
 
   return (
-    <>
+    <div>
+      <BackButton>
+        <button onClick={() => navigate(-1)}>{"<-Back"}</button>
+      </BackButton>
+      &nbsp;
       <div
         style={{
           display: "flex",
@@ -107,7 +112,7 @@ const BookDetails = () => {
           </BookInfo>
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 export default ErrorHandling(BookDetails);
