@@ -13,14 +13,15 @@ const FavoritesList = () => {
   if (!favorites) {
     return <div>Loading...</div>;
   }
-
+  const arr = new Set(favorites); // to remove duplicate objects from array
+  const arrAsArray = [...arr];
   return (
     <FavoritesContainer>
       <h1>Favorites List</h1>
-      {favorites?.length === 0 ? (
+      {arrAsArray?.length === 0 ? (
         <p>No books in favorites.</p>
       ) : (
-        favorites?.map((book) => {
+        arrAsArray?.map((book) => {
           const { volumeInfo } = book;
           const title = volumeInfo?.title;
           const authors = volumeInfo?.authors

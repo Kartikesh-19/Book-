@@ -8,8 +8,8 @@ import img from "../../../assets/images/download.png";
 import ErrorHandling from "./../../ErrorHandling/handleError";
 import {
   Container,
-  FavoritesButton,
   BookInfo,
+  FavBtn,
 } from "./../../css/bookDetailStyle/bookDetailStyle";
 const BookDetails = () => {
   const [book, setBook] = useState(null);
@@ -17,9 +17,9 @@ const BookDetails = () => {
   const [fav, setFav] = useState(false);
   console.log("🚀 ~ file: index.jsx:17 ~ BookDetails ~ fav:", fav);
   const [loading, setLoading] = useState(false);
+  const [loadingFav, setLoadingFav] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state?.favorites);
 
   const fetchBookDetails = async () => {
     try {
@@ -36,17 +36,25 @@ const BookDetails = () => {
   React.useEffect(() => {
     fetchBookDetails();
   }, [id]);
+
   const handleRemoveFromFavorites = (id) => {
     dispatch(removeFavorite({ id }));
     setLoading(false);
     setFav(false);
   };
 
-  const handleAddToFavorites = (id) => {
-    if (!favorites.includes(id)) dispatch(addFavorite(book));
+  const handleAddToFavorites = () => {
+    dispatch(addFavorite(book));
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+  };
+  const handleFavorite = () => {
+    setLoadingFav(true);
+    setFav(true);
+    setTimeout(() => {
+      setLoadingFav(false);
+    }, 5000);
   };
   if (!book) {
     return <div>Loading...</div>;
@@ -74,15 +82,18 @@ const BookDetails = () => {
           <img src={image} alt="" style={{ width: "100%" }} />
         </div>
         <Container>
-          <FavoritesButton
-            onClick={() => setFav(true)}
-            style={{
-              backgroundColor: fav ? "lightblue" : "transparent",
-            }}
-          >
-            <img src={img} alt="" />
-            <p>Favorites List</p>
-          </FavoritesButton>
+          <FavBtn>
+            <button
+              onClick={() => handleFavorite()}
+              // style={{
+              //   backgroundColor: "#007bff",
+              //   color: "#ffffff",
+              // }}
+              disabled={loadingFav ? "Please Wait..." : false}
+            >
+              Favorites List
+            </button>
+          </FavBtn>
           <BookInfo>
             <h1>{title}</h1>
             <p>By: {authors}</p>
@@ -105,7 +116,7 @@ const BookDetails = () => {
           </BookInfo>
         </Container>
       </div>
-      {fav ? <FavoritesList /> : null}
+      {fav && loadingFav ? <FavoritesList /> : null}
     </>
   );
 };
