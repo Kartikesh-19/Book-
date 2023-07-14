@@ -1,6 +1,6 @@
  import styled from 'styled-components';
  
- export const Container = styled.div`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,8 +10,7 @@
       padding: 10px;
     }
   `;
-
-  export const BookInfo = styled.div`
+export const BookInfo = styled.div`
     text-align: center;
 
     h1 {
@@ -38,7 +37,7 @@
       }
     }
   `;
-  export const FavBtn = styled.div`
+export const FavBtn = styled.div`
    
     button {
       padding: 10px 20px;

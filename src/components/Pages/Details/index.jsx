@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addFavorite, removeFavorite } from "../../redux/slices/favoriteSlice";
 import { useSelector } from "react-redux";
 import FavoritesList from "../favorites";
-import img from "../../../assets/images/download.png";
 import ErrorHandling from "./../../ErrorHandling/handleError";
 import {
   Container,

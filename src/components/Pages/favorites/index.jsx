@@ -27,8 +27,12 @@ const FavoritesList = () => {
           const authors = volumeInfo?.authors
             ? volumeInfo.authors.join(", ")
             : "Unknown Author";
+          const image = volumeInfo.imageLinks
+            ? volumeInfo.imageLinks.thumbnail
+            : "";
           return (
             <FavoriteItem key={book?.id}>
+              <img src={image} alt="" style={{ width: 50, height: 50 }} />
               <Title>{title}</Title>
               <Authors>{authors}</Authors>
             </FavoriteItem>
