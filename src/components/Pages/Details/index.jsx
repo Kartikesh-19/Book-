@@ -49,13 +49,7 @@ const BookDetails = () => {
       setLoading(false);
     }, 1000);
   };
-  const handleFavorite = () => {
-    setLoadingFav(true);
-    setFav(true);
-    setTimeout(() => {
-      setLoadingFav(false);
-    }, 5000);
-  };
+
   if (!book) {
     return <div>Loading...</div>;
   }
@@ -84,16 +78,13 @@ const BookDetails = () => {
         <Container>
           <FavBtn>
             <button
-              onClick={() => handleFavorite()}
-              // style={{
-              //   backgroundColor: "#007bff",
-              //   color: "#ffffff",
-              // }}
+              onClick={() => setFav(true)}
               disabled={loadingFav ? "Please Wait..." : false}
             >
               Favorites List
             </button>
           </FavBtn>
+          {fav ? <FavoritesList /> : null}
           <BookInfo>
             <h1>{title}</h1>
             <p>By: {authors}</p>
@@ -116,7 +107,6 @@ const BookDetails = () => {
           </BookInfo>
         </Container>
       </div>
-      {fav && loadingFav ? <FavoritesList /> : null}
     </>
   );
 };
